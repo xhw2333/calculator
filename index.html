@@ -4,11 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小学四则运算器</title>
+    <title>大学四则运算器</title>
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <h1>小学四则运算器</h1>
+    <div class="body-context">
+        <div class="title">
+            <div class="context">
+                大学四则运算题随机生成器
+            </div>
+        </div>
+        <div class="author">
+            <div class="context">
+                author：xhw & cqr
+            </div>
+        </div>
+        <!-- <ul class="topic-num">
+            <li class="topic-select" num='10' click="createTopic">10道</li>
+            <li num='100' click="createTopic">100道</li>
+            <li num='1000' click="createTopic">1000道</li>
+            <li num='10000' click="createTopic">10000道</li>
+        </ul> -->
+        <div class="topic-num">
+            <span>
+                请输入题目数（1~10000） ：
+            </span>
+            <input class="topic-num-input" type="text">
+            <div class="submit-num" click='createTopic'>确认</div>
+        </div>
+        <div class="attention">
+            <!-- <h3>题目数量不能为空</h3> -->
+        </div>
+        <div class="topic-context"></div>
+        <div class="commit" click="commit">提交</div>
+    </div>
     <script src="./js/start.js"></script>
 </body>
 </html>
