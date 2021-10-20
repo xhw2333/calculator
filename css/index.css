@@ -109,6 +109,7 @@
 .commit {
     display: block;
     margin:3em auto;
+    margin-bottom: 1em;
     padding: 0.5em 0;
     color: #000;
     width: 11em;
@@ -119,4 +120,9 @@
     border-radius:8px ;
     border: 1px solid #000;
     /* background-color: #f40; */
+}
+
+.submitAttention {
+    color: red;
+    display: none;
 }

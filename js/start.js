@@ -1,5 +1,6 @@
 // 主要函数
 let {writeFile, readFile, getWriteArr} = require("./js/handleFile.js")
+let {checkAnswer} = require("./js/checkAnswer.js")
 //主要数据
 let topicArr = ['444444sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss4','55555555555','888888'] //存放题目的数组
 let answerArr = []   //存放答案的数组
@@ -10,6 +11,8 @@ let isTopicShow = false //是否有题目出现
 
 //获得主界面的元素
 let con = document.getElementsByClassName('body-context')[0]
+//提交功能提示的元素
+let subAttentionDom = document.getElementsByClassName('submitAttention')[0]
 
 //监听页面的点击事件
 con.onclick = (e) => {
@@ -43,6 +46,7 @@ const changeTopicNum = () => {
   }
   let judgeRes =  judgeInputVal(inputNumVal,attention)
   if(judgeRes){
+    subAttentionDom.style.display = 'none'
       //更新全局变量的题目数量
       topicNum = inputNumVal
       createTopic(inputNumVal)
@@ -113,8 +117,11 @@ const showTopic = (topics) => {
 //提交答案
 const commit = () => {
   if(!isTopicShow){
+    poinError('请输入合法的题目数量',subAttentionDom)
+    dom.innerHTML = htmlStr
     return 
   }
+  subAttentionDom.style.display = 'none'
   let writeArr = []
   let writeDomArr = document.getElementsByClassName('topic-write')
   let len =  writeDomArr.length
@@ -135,7 +142,7 @@ const judeg = (writeArr, answerArr) => {
   let correctArr = []
 	let wrongArr = []
   for(let i = 0 ; i < len ; i++){
-    if(true){
+    if(checkAnswer(writeArr[i],answerArr[i])){
       topicJudgeArr[i].innerHTML = '√'
       topicJudgeArr[i].style.color = '#080'
       correctArr.push(i+1)
@@ -145,4 +152,19 @@ const judeg = (writeArr, answerArr) => {
       wrongArr.push(i+1)
     }
   }
+  gradeArr = [`Correct: (${getStr(correctArr)})`, `Wrong: (${getStr(wrongArr)})`,]
+	writeFile(gradeArr, 2)
+}
+
+function getStr(dataArr) {
+	let str = '';
+	let len = dataArr.length;
+	for(let i = 0; i < len; i++) {
+		if(i+1 == len) {
+			str += ` ${dataArr[i]}`;
+		}else {
+			str += ` ${dataArr[i]},`;
+		}
+	}
+	return str;
 }
