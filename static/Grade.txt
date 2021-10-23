@@ -1,2 +1,2 @@
-Correct: (),
-Wrong: ( 1, 2, 3)
+Correct:(1) ( 1),
+Wrong:(0) ()

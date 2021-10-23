@@ -29,19 +29,17 @@
     color: gray;
 }
 
-.topic-num {
+.inputContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap:wrap;
-    /* width: 60%; */
     height: 20px;
     margin: 15px auto;
-    
 }
 
-.topic-num .topic-num-input {
+.inputContainer .inputContent{
     width: 5em;
     font-weight: bold;
     outline: none;
@@ -50,10 +48,10 @@
     border-bottom: 1px solid #666;
 }
 
-.topic-num .submit-num {
+.create-topic{
     display: block;
-    margin:0 auto;
-    padding: 0 1em;
+    margin:15px;
+    padding: 1em;
     color: #000;
     font-size: 14px;
     text-align: center;

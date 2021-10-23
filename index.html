@@ -25,16 +25,27 @@
             <li num='1000' click="createTopic">1000道</li>
             <li num='10000' click="createTopic">10000道</li>
         </ul> -->
-        <div class="topic-num">
+        <!-- 输入题目数 -->
+        <div class="topic-num inputContainer">
             <span>
                 请输入题目数（1~10000） ：
             </span>
-            <input class="topic-num-input" type="text">
-            <div class="submit-num" click='createTopic'>确认</div>
+            <input class="topic-num-input inputContent" type="text">
         </div>
-        <div class="attention">
-            <!-- <h3>题目数量不能为空</h3> -->
+
+        <!-- 输入数字范围 -->
+        <div class="num-range inputContainer">
+            <span>
+                请输入数字范围（1~10000） ：
+            </span>
+            <input class="num-range-input inputContent" type="text">
         </div>
+
+        <!-- 确认生成题目 -->
+        <div class="create-topic" click='createTopic'>生成题目</div>
+        <div class="attention"></div>
+
+        <!-- 题目展示 -->
         <div class="topic-context"></div>
         <div class="commit" click="commit">提交</div>
         <div class="submitAttention"></div>

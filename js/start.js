@@ -1,8 +1,10 @@
 // 主要函数
 let {writeFile, readFile, getWriteArr} = require("./js/handleFile.js")
 let {checkAnswer} = require("./js/checkAnswer.js")
+let { getRes } = require('./js/Expression/answer')
+let { getAllExpress } = require('./js/Expression/expression')
 //主要数据
-let topicArr = ['444444sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss4','55555555555','888888'] //存放题目的数组
+let topicArr = [] //存放题目的数组
 let answerArr = []   //存放答案的数组
 let gradeArr = []    //存放结果的数组
 let topicNum = 10 //题目数量，初始化为10
@@ -39,18 +41,27 @@ let topicCon = document.getElementsByClassName('topic-context')[0]
 const changeTopicNum = () => {
   //获取题目数量
   let inputNumVal = document.getElementsByClassName('topic-num-input')[0].value
+  //获取数字范围
+  let inputRangeVal = document.getElementsByClassName('num-range-input')[0].value
   let attention = document.getElementsByClassName('attention')[0]
   //去除原来的题目
   if(topicCon.innerHTML !== ''){
     topicCon.innerHTML = ''
   }
-  let judgeRes =  judgeInputVal(inputNumVal,attention)
-  if(judgeRes){
-    subAttentionDom.style.display = 'none'
-      //更新全局变量的题目数量
-      topicNum = inputNumVal
-      createTopic(inputNumVal)
-      isTopicShow = true
+  let judgeNumRes =  judgeInputVal(inputNumVal,attention)
+
+  //题目数量合法后再检测数字范围
+  if(judgeNumRes) {
+    let judgeRangeRes = judgeInputRange(inputRangeVal,attention)
+
+    //两个输入都合法后执行生成题目函数
+    if(judgeNumRes && judgeRangeRes){
+      subAttentionDom.style.display = 'none'
+        //更新全局变量的题目数量
+        topicNum = inputNumVal
+        createTopic(inputNumVal,inputRangeVal)
+        isTopicShow = true
+    }
   }
 }
 
@@ -78,6 +89,30 @@ const judgeInputVal = (inputVal,target) => {
   }
 }
 
+//判断用户输入的数字范围是否合法
+function judgeInputRange(inputVal,target) {
+  let reg = /(^[1-9]\d*$)/
+  if(inputVal === ''){
+    poinError('数字范围不能为空',target)
+    isTopicShow = false
+    return false
+  }
+  else if(!reg.test(inputVal)){
+    poinError('数字范围请输入正整数',target)
+    isTopicShow = false
+    return false
+  }
+  else if(inputVal > 10000){
+    poinError('数字范围输入值不能大于10000',target)
+    isTopicShow = false
+    return false
+  }
+  else{
+    target.style.display = 'none'
+    return true
+  }
+}
+
 //提示用户输入错误
 const poinError = (msg,target) => {
   
@@ -90,10 +125,22 @@ const poinError = (msg,target) => {
 }
 
 //生成题目与答案
-const createTopic = (num) => {
+const createTopic = (num,range) => {
+  //生成题目
+  topicArr = getAllExpress(num,range)
+  //获得对应题目的答案
+  for(let item of topicArr){
+    answerArr = []
+    answerArr.push(item.ans)
+  }
   showTopic(topicArr)
+
+  //将题目与答案写入文件
   writeFile(topicArr,0).then(() => {
-    console.log(readFile(0))
+    // console.log(readFile(0))
+  })
+  writeFile(topicArr,1).then(() => {
+    // console.log(readFile(0))
   })
 }
 
@@ -101,12 +148,12 @@ const createTopic = (num) => {
 const showTopic = (topics) => {
   let htmlStr = ''
   let len = topics.length
-  topicCon.innerHTML = ''
+  topicCon.innerHTML = '' 
   for(let i = 0 ; i < len ; i++){
     htmlStr += 
 		`<span class="topic">
 			<span>${i+1}、  </span>	
-			<p>${topics[i]}</p>
+			<p>${topics[i].expression}</p>
 			<input class="topic-write" type="text">
 			<div class="topic-judeg"></div>
 		</span>`
@@ -118,7 +165,7 @@ const showTopic = (topics) => {
 const commit = () => {
   if(!isTopicShow){
     poinError('请输入合法的题目数量',subAttentionDom)
-    dom.innerHTML = htmlStr
+    // dom.innerHTML = htmlStr
     return 
   }
   subAttentionDom.style.display = 'none'
@@ -135,8 +182,8 @@ const commit = () => {
 
 //验证函数
 const judeg = (writeArr, answerArr) => {
-  console.log('write:', writeArr)
-	console.log('answer:', answerArr)
+  console.log(writeArr);
+  console.log(answerArr)
   let len = writeArr.length
   let topicJudgeArr = document.getElementsByClassName('topic-judeg')
   let correctArr = []
@@ -152,7 +199,7 @@ const judeg = (writeArr, answerArr) => {
       wrongArr.push(i+1)
     }
   }
-  gradeArr = [`Correct: (${getStr(correctArr)})`, `Wrong: (${getStr(wrongArr)})`,]
+  gradeArr = [`Correct:(${correctArr.length}) (${getStr(correctArr)})`, `Wrong:(${wrongArr.length}) (${getStr(wrongArr)})`,]
 	writeFile(gradeArr, 2)
 }
 

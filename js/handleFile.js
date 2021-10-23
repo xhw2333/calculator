@@ -14,21 +14,35 @@ function writeFile(arr,type) {
     }
     let len = arr.length
     let str = ''
-    let path = ''
-    for(let i = 0 ; i < len ; i++){
-      if(i == len-1){
-        str += arr[i]
-      }else{
-        str += arr[i] + ',\r\n'
-      }
-    }
+    let path = '' 
     if(type === 0){
+      for(let i = 0 ; i < len ; i++){
+        if(i == len-1){
+          str += arr[i].expression
+        }else{
+          str += arr[i].expression + ',\r\n'
+        }
+      }
       path = './static/exercisefile.txt'
     }
     else if(type === 1){
+      for(let i = 0 ; i < len ; i++){
+        if(i == len-1){
+          str += arr[i].ans
+        }else{
+          str += arr[i].ans + ',\r\n'
+        }
+      }
       path = "./static/answerfile.txt"
     }
     else if(type === 2){
+      for(let i = 0 ; i < len ; i++){
+        if(i == len-1){
+          str += arr[i]
+        }else{
+          str += arr[i] + ',\r\n'
+        }
+      }
       path = "./static/Grade.txt"
     }
     else{
