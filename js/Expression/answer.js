@@ -17,13 +17,18 @@ function midToAfter(expression) {
         switch (ele) {
             case '+':
             case '-':
-                while (stack[stack.length - 1] === '*' || stack[stack.length - 1] === '÷') {
+                while (stack[stack.length - 1] === '*' || stack[stack.length - 1] === '÷' || stack[stack.length - 1] === '-' || stack[stack.length - 1] === '+') {
                     res.push(stack.pop());
                 }
                 stack.push(ele);
                 break;
             case '÷':
             case '*':
+                while (stack[stack.length - 1] === '*' || stack[stack.length - 1] === '÷') {
+                    res.push(stack.pop());
+                }
+                stack.push(ele);
+                break;
             case '(':
                 stack.push(ele);
                 break;
@@ -189,7 +194,12 @@ function changeNum2(str) {
 
     if (x % y === 0) return parseInt(x / y);
 
-    if(x < y) return str;
+    // 化简
+    [x,y] = simplifyNum(x,y);
+
+    if(x < y){
+        return x + '/' + y;
+    }
 
     const zheng = parseInt(x/y),
         yu = x % y;
@@ -198,7 +208,9 @@ function changeNum2(str) {
 }
 
 
-// console.log(getRes("7 ÷ 4 * 6/6".split(" ")));
+console.log(getRes("0 ÷ 1 + 1 * 9".split(" ")));
+// console.log(getRes('5/7 ÷ 10 * 4'.split(" ")))
+// console.log(midToAfter('5/7 ÷ 10 * 4'.split(" ")))
 // console.log(midToAfter('1+2*2-(3*5)'.split('')))
 // console.log(calculateIfFrac('2', '21/2', '*'));
 // console.log(changeNum1("1'1/2"))

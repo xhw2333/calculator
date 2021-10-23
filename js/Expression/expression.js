@@ -103,7 +103,7 @@ module.exports = {
     getAllExpress
 }
 
-// getAllExpress(100,99);
+getAllExpress(10,12);
 
 
 /* // 生成分数(废弃)
