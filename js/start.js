@@ -189,7 +189,7 @@ const judeg = (writeArr, answerArr) => {
   let correctArr = []
 	let wrongArr = []
   for(let i = 0 ; i < len ; i++){
-    if(checkAnswer(writeArr[i],answerArr[i])){
+    if(writeArr[i] == answerArr[i]){
       topicJudgeArr[i].innerHTML = '√'
       topicJudgeArr[i].style.color = '#080'
       correctArr.push(i+1)
