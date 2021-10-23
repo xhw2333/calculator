@@ -129,8 +129,8 @@ const createTopic = (num,range) => {
   //生成题目
   topicArr = getAllExpress(num,range)
   //获得对应题目的答案
+  answerArr = []
   for(let item of topicArr){
-    answerArr = []
     answerArr.push(item.ans)
   }
   showTopic(topicArr)
