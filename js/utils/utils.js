@@ -16,6 +16,8 @@ function getRandomNum(min, max) {
  */
 function simplifyNum(num1, num2) {
     // 本质上就是求出两个数的最大公约数，然后进行化简
+    if (num2 === 0) throw new Error("分母无意义");
+    if (num1 === 0) return [num1, num2]; //直接返回即可 
     if (num1 < num2) {
         const [temp1, temp2] = simplifyNum(num2, num1);
         return [temp2, temp1];
@@ -33,7 +35,7 @@ function simplifyNum(num1, num2) {
  * @return {*} a，b的最大公约数
  */
 function gcd(a, b) {
-    if(a === 0 || b == 0) throw new Error("0没有公约数")
+    if (a === 0 || b == 0) throw new Error("0没有公约数")
     while (a % b !== 0) {
         const temp = a % b;
         a = b;
