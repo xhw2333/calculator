@@ -63,9 +63,13 @@ function getFraction(max) {
     // 返回真分数
     if (num1 <= num2) return '' + num1 + '/' + num2;
 
-    // 防止出现分子为0的情况
+    let i = 0;
+    // 防止真分数出现分子为0的情况
     while (num1 % num2 === 0) {
+        // console.log(num1,num2);
         num2 = getRandomNum(1, max);
+        if(i === 2) return parseInt(num1/num2);
+        i++;
     }
 
     // 会出现生成num1<num2的情况，如果在循环中直接设置num2属于[1，num1]，有可能出现死循环，经过再三考虑决定这样设计
@@ -89,7 +93,7 @@ function getAllExpress(num, range) {
         try {
             const the = getExpression(range);
             res.push(the)
-            console.log(i, '表达式：' + the.expression, '答案：' + the.ans);
+            // console.log(i, '表达式：' + the.expression, '答案：' + the.ans);
         } catch (error) {
             console.log(error.message)
             i--;
@@ -103,7 +107,7 @@ module.exports = {
     getAllExpress
 }
 
-getAllExpress(10,12);
+// getAllExpress(1,2);
 
 
 /* // 生成分数(废弃)

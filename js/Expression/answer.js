@@ -208,7 +208,7 @@ function changeNum2(str) {
 }
 
 
-console.log(getRes("0 ÷ 1 + 1 * 9".split(" ")));
+// console.log(getRes("0 ÷ 1 + 1 * 9".split(" ")));
 // console.log(getRes('5/7 ÷ 10 * 4'.split(" ")))
 // console.log(midToAfter('5/7 ÷ 10 * 4'.split(" ")))
 // console.log(midToAfter('1+2*2-(3*5)'.split('')))
