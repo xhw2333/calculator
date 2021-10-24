@@ -1,10 +1,11 @@
 const { getRandomNum } = require("../utils/utils.js");
-const { getRes } = require("./answer.js")
+const { getRes } = require("./answer.js");
+const {ifRepeat} = require("./repeat.js");
 
 const operators = ['+', '-', '*', '÷'];
 
 // 生成算术表达式
-function getExpression(max) {
+function getExpression(max,hash) {
     let expression = [];
 
     let count = getRandomNum(2, 4), //题目包含的数字数
@@ -47,7 +48,13 @@ function getExpression(max) {
 
     // console.log("结果:" + getRes(expression));
     ans = getRes(expression);
-    if (/-/g.test(ans)) throw new Error(`答案${ans}不能为负数`);
+    if (/-/g.test(ans)) throw new Error(`答案${ans}，不能为负数`);
+
+    // 去重操作
+    const formatExp = expression.join("|");
+    if(ifRepeat(hash,formatExp,ans)) throw new Error(`表达式【${formatExp}】重复`);
+    hash.set(formatExp,ans);
+
     expression.push("=");
     return {
         expression: expression.join(" "),
@@ -88,12 +95,13 @@ function getFraction(max) {
  */
 function getAllExpress(num, range) {
     let time = new Date().getTime();
-    const res = [];
+    const res = [],
+        hash = new Map();
     for (let i = 0; i < num; i++) {
         try {
-            const the = getExpression(range);
-            res.push(the)
-            // console.log(i, '表达式：' + the.expression, '答案：' + the.ans);
+            const the = getExpression(range,hash);
+            res.push(the);
+            console.log(i, '表达式：' + the.expression, '答案：' + the.ans);
         } catch (error) {
             console.log(error.message)
             i--;
@@ -106,8 +114,6 @@ function getAllExpress(num, range) {
 module.exports = {
     getAllExpress
 }
-
-// getAllExpress(1,2);
 
 
 /* // 生成分数(废弃)

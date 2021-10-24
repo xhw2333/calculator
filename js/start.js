@@ -1,7 +1,5 @@
 // 主要函数
 let {writeFile, readFile, getWriteArr} = require("./js/handleFile.js")
-let {checkAnswer} = require("./js/checkAnswer.js")
-let { getRes } = require('./js/Expression/answer')
 let { getAllExpress } = require('./js/Expression/expression')
 //主要数据
 let topicArr = [] //存放题目的数组
