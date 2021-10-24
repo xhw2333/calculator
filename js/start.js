@@ -31,7 +31,6 @@ con.onclick = (e) => {
   }
 }
 
-//1、 切换题目数量
 
 //获取展示题目的元素
 let topicCon = document.getElementsByClassName('topic-context')[0]

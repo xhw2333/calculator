@@ -11,7 +11,12 @@ function ifRepeat(hash,expression,ans){
     return false;
 }
 
-// 判断两个式子是否相同，思路类似两个单词是否为变位词
+/**
+ * @description: 判断两个式子是否相同，思路类似两个单词是否为变位词
+ * @param {*} one 第一个式子
+ * @param {*} two 第二个式子
+ * @return {*} boolean 
+ */
 function ifSame(one,two){
     // 前面以保证了one和two长度相等
 

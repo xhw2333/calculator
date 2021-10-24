@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-packager . app --out dist --arch=x64 --overwrite --ignore=node_modules"
+    "build": "electron-packager . calculator --out dist --arch=x64 --overwrite --ignore=node_modules"
   },
   "keywords": [],
   "author": "",

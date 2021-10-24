@@ -4,7 +4,12 @@ const {ifRepeat} = require("./repeat.js");
 
 const operators = ['+', '-', '*', '÷'];
 
-// 生成算术表达式
+/**
+ * @description: 生成算术表达式
+ * @param {*} max 最大数范围，数属于[0,max]
+ * @param {*} hash hash表，用于去重
+ * @return {*} 返回一个包含表达式和答案的对象，{expression,ans}
+ */
 function getExpression(max,hash) {
     let expression = [];
 
@@ -107,7 +112,7 @@ function getAllExpress(num, range) {
             i--;
         }
     }
-    console.log("生成题目时间：" + (new Date().getTime() - time) + 'ms');
+    console.log(`生成${num}道题目时间：` + (new Date().getTime() - time) + 'ms');
     return res;
 }
 

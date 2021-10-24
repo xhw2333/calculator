@@ -79,7 +79,13 @@ function evalRPN(expression) {
     return res;
 }
 
-// 根据是否是分数计算
+/**
+ * @description: 根据两个数是否是分数分情况进行计算
+ * @param {*} one 数字
+ * @param {*} two 数字
+ * @param {*} opera 运算符
+ * @return {*} 返回分数或整数
+ */
 function calculateIfFrac(one, two, opera) {
     // 带有分数的情况
     if (/\//g.test(one) && /\//g.test(two)) {
